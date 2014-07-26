@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Pozeray by z-core</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Pozeray</h1>
+        <p>A tool for logging front-end JavaScript.</p>
+
+        <p class="view"><a href="https://github.com/z-core/pozeray">View the Project on GitHub <small>z-core/pozeray</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/z-core/pozeray/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/z-core/pozeray/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/z-core/pozeray">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="pozeray" class="anchor" href="#pozeray"><span class="octicon octicon-link"></span></a>Pozeray</h1>
+
+<p>Pozeray is a tool for logging front-end JavaScript.</p>
+
+<h1>
+<a name="cons-of-the-standard-console-object" class="anchor" href="#cons-of-the-standard-console-object"><span class="octicon octicon-link"></span></a>Cons of the standard console object</h1>
+
+<p>It is easy to use console to output logging informations like errors, warnings, infos, etc. However</p>
+
+<ul>
+<li>each browser has different implementation for the console object. Some browsers have more methods, others have less.</li>
+<li>the UI of the console is different in each browser</li>
+<li>there are too many redundant messages in the browsers native console panel</li>
+<li>it is impossible to group somehow the logged messages with the standard console</li>
+</ul><h1>
+<a name="pros-of-using-pozeray-loggers" class="anchor" href="#pros-of-using-pozeray-loggers"><span class="octicon octicon-link"></span></a>Pros of using Pozeray loggers</h1>
+
+<ul>
+<li>Pozeray loggers are the same in all browsers.</li>
+<li>Each logged message has an area attached to it. This allows to group messages nicely and filter them easily.</li>
+</ul><h1>
+<a name="how-to-use-it" class="anchor" href="#how-to-use-it"><span class="octicon octicon-link"></span></a>How to use it</h1>
+
+<p>Currently Pozeray has these methods to log messages: <code>error, warn, info, log, debug</code>. All of them have one input parameter - the message.</p>
+
+<p>There is a preinitialized logger for logging messages in the "Default" area. This logger is accessible through the $logger global variable. E.g., logging an error in the default area</p>
+
+<pre><code>$logger.error('Oops, something went very wrong!');
+</code></pre>
+
+<p>In order to use a new area, a new Logger has to be created. E.g., creating a Logger in the "Tracking" area and logging a warning</p>
+
+<pre><code>var trackingLogger = new Logger({ area: 'Tracking'});
+trackingLogger.warn('This a tracking warning.');
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/z-core">z-core</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
