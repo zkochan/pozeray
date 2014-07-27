@@ -1,3 +1,10 @@
+/*!
+ * Pozeray v0.0.1
+ * https://github.com/z-core/pozeray
+ *
+ * Copyright 2014 Zoltan Kochan
+ * Released under the MIT license
+ */
 ;(function () {
 	// Constants
 	var DEFAULT_AREA_NAME = 'Default';
