@@ -26,9 +26,12 @@
 	pozeray.VERSION = '0.0.1';
 
 	window.Logger = function(settings) {
-		settings = $.extend({
-			area: DEFAULT_AREA_NAME
-		}, settings);
+		if (!settings) {
+			settings = {};
+		}
+		if (!settings.area) {
+			settings.area = DEFAULT_AREA_NAME;
+		}
 
 		var self = this;
 
@@ -80,5 +83,9 @@
 				listeners.push(arguments[i]);
 			}
 		}
+	};
+
+	pozeray.removeListeners = function () {
+		listeners = [];
 	};
 })();

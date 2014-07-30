@@ -1,0 +1,25 @@
+{
+  "name": "pozeray",
+  "main": "pozeray.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/z-core/pozeray",
+  "authors": [
+    "Zoltan Kochan"
+  ],
+  "description": "A tool for logging front-end JavaScript",
+  "keywords": [
+    "logging",
+    "console",
+    "javascript"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}

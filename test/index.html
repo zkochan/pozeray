@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Jasmine template" />
+
+    <meta charset="utf-8">
+    <title>Pozeray test</title>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jasmine/2.0.0/jasmine.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jasmine/2.0.0/jasmine-html.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jasmine/2.0.0/boot.js"></script>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jasmine/2.0.0/jasmine.css">
+
+    <script type="text/javascript" src="../pozeray.js"></script>
+
+    <style>
+        body {
+            padding: 20px 40px;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Pozeray test</h1>
+    <div>
+    </div>
+    <div>See source for implementation and test</div>
+    <script>
+        var messageTypes = ['log', 'error', 'warn', 'info', 'debug'];
+
+        //Run tests
+        describe('Logging in the default area', function() {
+            var messageText = 'Some error',
+                defaultAreaName = 'Default';
+
+            messageTypes.forEach(function (messageType) {
+                it('Should log ' + messageType + 's', function(done) {
+                    pozeray.listen(function (message) {
+                        expect(message.area).toBe(defaultAreaName);
+                        expect(message.type).toBe(messageType);
+                        expect(message.body).toBe(messageText);
+                        done();
+                    });
+                    $logger[messageType](messageText);
+                });
+            });
+
+            afterEach(function() {
+                pozeray.removeListeners();
+            });
+        });
+
+        describe('Logging in a custom area', function() {
+            var messageText = 'Some error',
+                areaName = 'Custom area';
+
+            var customLogger = new Logger(areaName);
+
+            messageTypes.forEach(function (messageType) {
+                it('Should log ' + messageType + 's', function(done) {
+                    pozeray.listen(function (message) {
+                        expect(message.area).toBe(areaName);
+                        expect(message.type).toBe(messageType);
+                        expect(message.body).toBe(messageText);
+                        done();
+                    });
+                    customLogger[messageType](messageText);
+                });
+            });
+
+            afterEach(function() {
+                pozeray.removeListeners();
+            });
+        });
+    </script>
+</body>
+
+</html>
