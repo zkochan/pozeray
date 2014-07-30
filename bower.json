@@ -1,6 +1,6 @@
 {
   "name": "pozeray",
-  "main": "pozeray.js",
+  "main": "src/pozeray.js",
   "version": "0.0.1",
   "homepage": "https://github.com/z-core/pozeray",
   "authors": [
