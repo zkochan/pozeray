@@ -19,11 +19,8 @@
 	};
 
 	// Local variables
-	var listeners = [];
-
-	window.pozeray = {};
-
-	pozeray.VERSION = '0.0.1';
+	var listeners = [],
+		messages = [];
 
 	window.Logger = function(settings) {
 		if (!settings) {
@@ -45,12 +42,14 @@
 				values = values[0];
 			}
 
+			var message = {
+				type: type,
+				area: settings.area,
+				body: values
+			};
+			messages.push(message);
 			for (var i = 0; i < listeners.length; i++) {
-				listeners[i]({
-					type: type,
-					area: settings.area,
-					body: values
-				});
+				listeners[i](message);
 			}
 		}
 		
@@ -77,15 +76,29 @@
 
 	window.$logger = new Logger();
 
-	pozeray.listen = function () {
-		for (var i = 0; i < arguments.length; i++) {
-			if (typeof arguments[i] == 'function') {
-				listeners.push(arguments[i]);
-			}
-		}
-	};
 
-	pozeray.removeListeners = function () {
-		listeners = [];
+	window.pozeray = {
+		VERSION: '0.0.1',
+		listen: function () {
+			for (var i = 0; i < arguments.length; i++) {
+				if (typeof arguments[i] == 'function') {
+					listeners.push(arguments[i]);
+				}
+			}
+		},
+		removeListeners: function () {
+			listeners = [];
+		},
+		getLogs: function(filter) {
+			var filteredMessages = [];
+			messages.forEach(function (message) {
+				if (filter && (filter.area && filter.area != message.area || filter.type && filter.type != message.type)) return;
+				filteredMessages.push(message);
+			});
+			return filteredMessages;
+		},
+		removeLogs: function () {
+			messages = [];
+		}
 	};
 })();

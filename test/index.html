@@ -38,7 +38,7 @@
                 defaultAreaName = 'Default';
 
             messageTypes.forEach(function (messageType) {
-                it('Should log ' + messageType + 's', function(done) {
+                it('logs ' + messageType + 's', function(done) {
                     pozeray.listen(function (message) {
                         expect(message.area).toBe(defaultAreaName);
                         expect(message.type).toBe(messageType);
@@ -61,7 +61,7 @@
             var customLogger = new Logger({area: areaName});
 
             messageTypes.forEach(function (messageType) {
-                it('Should log ' + messageType + 's', function(done) {
+                it('logs ' + messageType + 's', function(done) {
                     pozeray.listen(function (message) {
                         expect(message.area).toBe(areaName);
                         expect(message.type).toBe(messageType);
@@ -74,6 +74,43 @@
 
             afterEach(function() {
                 pozeray.removeListeners();
+            });
+        });
+
+        describe('Getting the list of log messages', function () {
+            var testLogger = new Logger({area:'test'});
+
+            beforeEach(function () {
+                pozeray.removeLogs();
+
+                $logger.error('Some error 1');
+                $logger.error('Some error 2');
+                $logger.warn('Some warning 1');
+                $logger.warn('Some warning 2');
+                $logger.warn('Some warning 3');
+                testLogger.error('Some error');
+            });
+
+            it('returns all messages when not filtered', function () {
+                expect(pozeray.getLogs().length).toBe(6);
+            });
+
+            it('returns filtered messages when filtered by log type', function () {
+                expect(pozeray.getLogs({type: 'warn'}).length).toBe(3);
+                expect(pozeray.getLogs({type: 'error'}).length).toBe(3);
+            });
+
+            it('returns filtered messages when filtered by log area', function () {
+                expect(pozeray.getLogs({area: 'Default'}).length).toBe(5);
+                expect(pozeray.getLogs({area: 'test'}).length).toBe(1);
+            });
+
+            it('returns filtered messages when filtered by log type and area', function () {
+                expect(pozeray.getLogs({area: 'Default', type: 'error'}).length).toBe(2);
+            });
+
+            afterEach(function() {
+                pozeray.removeLogs();
             });
         });
     </script>
