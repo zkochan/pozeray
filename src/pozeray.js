@@ -45,7 +45,8 @@
 			var message = {
 				type: type,
 				area: settings.area,
-				body: values
+				body: values,
+				ts: new Date()
 			};
 			messages.push(message);
 			for (var i = 0; i < listeners.length; i++) {

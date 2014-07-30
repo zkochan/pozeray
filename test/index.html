@@ -43,6 +43,7 @@
                         expect(message.area).toBe(defaultAreaName);
                         expect(message.type).toBe(messageType);
                         expect(message.body).toBe(messageText);
+                        expect(message.ts).not.toBe(null);
                         done();
                     });
                     $logger[messageType](messageText);
@@ -66,6 +67,7 @@
                         expect(message.area).toBe(areaName);
                         expect(message.type).toBe(messageType);
                         expect(message.body).toBe(messageText);
+                        expect(message.ts).not.toBe(null);
                         done();
                     });
                     customLogger[messageType](messageText);
