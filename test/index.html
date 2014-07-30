@@ -58,7 +58,7 @@
             var messageText = 'Some error',
                 areaName = 'Custom area';
 
-            var customLogger = new Logger(areaName);
+            var customLogger = new Logger({area: areaName});
 
             messageTypes.forEach(function (messageType) {
                 it('Should log ' + messageType + 's', function(done) {
